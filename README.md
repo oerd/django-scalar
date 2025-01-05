@@ -18,7 +18,7 @@
   #filters/user.py
 ```
 ## usage of get_filter_parameters
-- you need to create a basic or complex django-filter class and then use the script from get_filter_parameters the auto-parse the class to a valid OpenApiParameter
+- you need to create a basic or complex django-filter class and then use the script from [get_filter_parameters](https://github.com/m1guer/django-scalar/blob/main/get_filter_parameters.py) the auto-parse the class to a valid OpenApiParameter
 ```python
   #(app)/filters/users.py
   import django_filters
