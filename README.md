@@ -1,9 +1,12 @@
-## req:
+> **Note** ⚠️ This is based on code forked from github.com/m1guer/django-scalar
+
+
+## requirements:
 - [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/)
 - [django-filters](https://django-filter.readthedocs.io/en/stable/) (optional)
 
 
-## documentation example:
+## Documentation example:
 ```python
     #views.py
     @extend_schema(
