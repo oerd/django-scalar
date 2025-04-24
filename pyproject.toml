@@ -1,0 +1,26 @@
+[project]
+name = "django-scalar"
+version = "0.1.6"
+description = "Publish your Django API docs with Scalar"
+readme = "README.md"
+authors = [
+]
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "drf-spectacular>=0.28.0",
+    "django-filter>=24",
+    "djangorestframework>= 3.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff",
+]
+build = [
+    "hatchling>=1.26.3",
+]
+
+[build-system]
+requires = ["hatchling >= 1.26.3"]
+build-backend = "hatchling.build"

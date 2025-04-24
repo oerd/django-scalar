@@ -1,9 +1,44 @@
-## req:
+# Django Scalar
+
+Django-Scalar provides an easy way to serve your API docs with [Scalar](https://scalar.com).
+
+> **Note**: This project is still in its early stages. Pull requests are welcome.
+
+## Installation
+
+The python package to install is `django-scalar`. You can install it with `pip install django-scalar`
+or `uv add django-scalar` based on your preferred python package manager.
+
+## Integrate in your Django app
+
+At this stage, it is required that you have your OpenAPI schema published
+with `DRF-Spectacular` under the `api/schema/` endpoint.
+
+To integrate django scalar include `django-scalar.views.scalar_viewer` in your `urls.py`.
+
+```python
+from django.urls import path
+from django_scalar.views import scalar_viewer
+from drf_spectacular.views import SpectacularAPIView
+
+urlpatterns = [
+    # ...existing URL patterns...
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Add this:
+    path("api-docs/", scalar_viewer, name="scalar-viewer"),
+]
+``` 
+
+Feel free to change `api-docs/` to your liking. We've seen `api/docs` etc. in the wild.
+
+## Requirements:
+There are two main requirements for this project:
 - [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/)
 - [django-filters](https://django-filter.readthedocs.io/en/stable/) (optional)
 
+This project implicitly depends on Django and Django-Rest-Framework.
 
-## documentation example:
+## Documentation example:
 ```python
     #views.py
     @extend_schema(
