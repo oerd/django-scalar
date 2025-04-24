@@ -1,10 +1,11 @@
 [project]
 name = "django-scalar"
-version = "0.1.4"
+version = "0.1.6"
 description = "Publish your Django API docs with Scalar"
 readme = "README.md"
 authors = [
 ]
+license = { text = "MIT" }
 requires-python = ">=3.11"
 dependencies = [
     "drf-spectacular>=0.28.0",
