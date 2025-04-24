@@ -26,7 +26,6 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> Optional[List[OpenAp
 
     for field_name, filter_instance in filter_class().filters.items():
         parameter_type = str  # default type
-        parameter_format = None
         enum = None
 
         # Determine parameter type based on filter type
