@@ -1,5 +1,8 @@
-> **Note** ⚠️ This is based on code forked from github.com/m1guer/django-scalar
+# Django Scalar
 
+Django-Scalar provides an easy way to serve your API docs with [Scalar](https://scalar.com).
+
+> **Note**: This project is still in its early stages. Pull requests are welcome.
 
 ## requirements:
 - [drf-spectacular](https://drf-spectacular.readthedocs.io/en/latest/)
