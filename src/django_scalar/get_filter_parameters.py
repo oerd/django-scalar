@@ -1,14 +1,14 @@
 from typing import Type, List
+
 from django_filters import FilterSet
-from drf_spectacular.utils import OpenApiParameter
 from django_filters.filters import (
-    CharFilter,
     NumberFilter,
     DateFilter,
     BooleanFilter,
     ChoiceFilter,
     ModelChoiceFilter,
 )
+from drf_spectacular.utils import OpenApiParameter
 from rest_framework.fields import DecimalField
 
 
