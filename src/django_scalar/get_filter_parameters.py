@@ -1,4 +1,4 @@
-from typing import Type, List
+from typing import Type, List, Optional
 
 from django_filters import FilterSet
 from django_filters.filters import (
@@ -12,7 +12,7 @@ from drf_spectacular.utils import OpenApiParameter
 from rest_framework.fields import DecimalField
 
 
-def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParameter]:
+def get_filter_parameters(filter_class: Type[FilterSet]) -> Optional[List[OpenApiParameter]]:
     """
     Automatically generate OpenAPI parameters from a FilterSet class.
 
@@ -74,3 +74,5 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
 
         parameters.append(param)
         return parameters
+    else:
+        return None
