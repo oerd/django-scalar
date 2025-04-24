@@ -38,7 +38,6 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
             parameter_type = bool
         elif isinstance(filter_instance, DateFilter):
             parameter_type = str
-            parameter_format = "date"
         elif isinstance(filter_instance, ChoiceFilter):
             parameter_type = str
             enum = [choice[0] for choice in filter_instance.extra["choices"]]
