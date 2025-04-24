@@ -8,12 +8,15 @@ authors = [
 requires-python = ">=3.11"
 dependencies = [
     "drf-spectacular>=0.28.0",
-    "hatchling>=1.26.3",
+    "django-filter >= 24.1",
 ]
 
 [project.optional-dependencies]
 dev = [
   "ruff",
+]
+build = [
+    "hatchling>=1.26.3",
 ]
 
 [build-system]

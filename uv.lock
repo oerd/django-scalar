@@ -35,26 +35,42 @@ wheels = [
 ]
 
 [[package]]
+name = "django-filter"
+version = "25.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b5/40/c702a6fe8cccac9bf426b55724ebdf57d10a132bae80a17691d0cf0b9bac/django_filter-25.1.tar.gz", hash = "sha256:1ec9eef48fa8da1c0ac9b411744b16c3f4c31176c867886e4c48da369c407153", size = 143021, upload_time = "2025-02-14T16:30:53.238Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/a6/70dcd68537c434ba7cb9277d403c5c829caf04f35baf5eb9458be251e382/django_filter-25.1-py3-none-any.whl", hash = "sha256:4fa48677cf5857b9b1347fed23e355ea792464e0fe07244d1fdfb8a806215b80", size = 94114, upload_time = "2025-02-14T16:30:50.435Z" },
+]
+
+[[package]]
 name = "django-scalar"
 version = "0.1.4"
 source = { editable = "." }
 dependencies = [
+    { name = "django-filter" },
     { name = "drf-spectacular" },
-    { name = "hatchling" },
 ]
 
 [package.optional-dependencies]
+build = [
+    { name = "hatchling" },
+]
 dev = [
     { name = "ruff" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "django-filter", specifier = ">=24.1" },
     { name = "drf-spectacular", specifier = ">=0.28.0" },
-    { name = "hatchling", specifier = ">=1.26.3" },
+    { name = "hatchling", marker = "extra == 'build'", specifier = ">=1.26.3" },
     { name = "ruff", marker = "extra == 'dev'" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "build"]
 
 [[package]]
 name = "djangorestframework"
