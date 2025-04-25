@@ -11,8 +11,9 @@ or `uv add django-scalar` based on your preferred python package manager.
 
 ## Integrate in your Django app
 
-At this stage, it is required that you have your OpenAPI schema published
-with `DRF-Spectacular` under the `api/schema/` endpoint.
+At this stage, the view expects that you have your OpenAPI schema published
+with `DRF-Spectacular` under the `api/schema/` endpoint. See below under **Customize
+Django Scalar** for how you can customize this.
 
 To integrate django scalar include `django-scalar.views.scalar_viewer` in your `urls.py`.
 
@@ -30,6 +31,14 @@ urlpatterns = [
 ``` 
 
 Feel free to change `api-docs/` to your liking. We've seen `api/docs` etc. in the wild.
+
+## Customize Django Scalar
+
+> ℹ️ **Note** we have plans to make this easier soon.
+
+The `scalar_viewer` view will pass on some hardcoded defaults to the template. You can
+[override the template](https://docs.djangoproject.com/en/5.2/howto/overriding-templates/)
+and change everything to match your environment.
 
 ## Requirements:
 There are two main requirements for this project:
@@ -52,12 +61,16 @@ This project implicitly depends on Django and Django-Rest-Framework.
         return super().list(request, *args, **kwargs)
   #filters/user.py
 ```
-## usage of get_filter_parameters
-- you need to create a basic or complex django-filter class and then use the script from [get_filter_parameters](https://github.com/m1guer/django-scalar/blob/main/get_filter_parameters.py) the auto-parse the class to a valid OpenApiParameter
+## Using `get_filter_parameters`
+
+You need to create a basic or complex django-filter class and then use the script from 
+[`get_filter_parameters`](https://github.com/m1guer/django-scalar/blob/main/src/django_scalar/get_filter_parameters.py)
+the auto-parse the class to a valid `OpenApiParameter`.
+
 ```python
   #(app)/filters/users.py
   import django_filters
-  from core.models.user import User
+  from django.conf import settings
 
 
   class UserFilter(django_filters.FilterSet):
@@ -106,7 +119,7 @@ This project implicitly depends on Django and Django-Rest-Framework.
       )
   
       class Meta:
-          model = User
+          model = settings.AUTH_USER_MODEL,
           fields = [
               "username",
               "email",
