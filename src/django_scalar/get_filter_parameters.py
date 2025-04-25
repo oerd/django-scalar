@@ -72,6 +72,4 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> Optional[List[OpenAp
         )
 
         parameters.append(param)
-        return parameters
-    else:
-        return None
+    return parameters
