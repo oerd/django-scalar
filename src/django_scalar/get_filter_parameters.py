@@ -1,18 +1,18 @@
-from typing import Type, List
+from typing import Type, List, Optional
+
 from django_filters import FilterSet
-from drf_spectacular.utils import OpenApiParameter
 from django_filters.filters import (
-    CharFilter,
     NumberFilter,
     DateFilter,
     BooleanFilter,
     ChoiceFilter,
     ModelChoiceFilter,
 )
+from drf_spectacular.utils import OpenApiParameter
 from rest_framework.fields import DecimalField
 
 
-def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParameter]:
+def get_filter_parameters(filter_class: Type[FilterSet]) -> Optional[List[OpenApiParameter]]:
     """
     Automatically generate OpenAPI parameters from a FilterSet class.
 
@@ -26,7 +26,6 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
 
     for field_name, filter_instance in filter_class().filters.items():
         parameter_type = str  # default type
-        parameter_format = None
         enum = None
 
         # Determine parameter type based on filter type
@@ -38,7 +37,6 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
             parameter_type = bool
         elif isinstance(filter_instance, DateFilter):
             parameter_type = str
-            parameter_format = "date"
         elif isinstance(filter_instance, ChoiceFilter):
             parameter_type = str
             enum = [choice[0] for choice in filter_instance.extra["choices"]]
@@ -74,4 +72,4 @@ def get_filter_parameters(filter_class: Type[FilterSet]) -> List[OpenApiParamete
         )
 
         parameters.append(param)
-        return parameters
+    return parameters
