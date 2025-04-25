@@ -1,6 +1,6 @@
 [project]
 name = "django-scalar"
-version = "0.1.6"
+version = "0.1.7"
 description = "Publish your Django API docs with Scalar"
 readme = "README.md"
 authors = [
