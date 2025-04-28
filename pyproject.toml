@@ -33,9 +33,27 @@ dependencies = [
     "djangorestframework >= 3.15.0",
 ]
 
+[project.urls]
+Homepage = "https://www.example.com/"
+Source = "https://github.com/oerd/django-scalar"
+
 [project.optional-dependencies]
-dev = [
-  "ruff",
+test = [
+    "mypy==1.15.0", # https://github.com/python/mypy
+    "django-stubs[compatible-mypy]==5.2.0", # https://github.com/typeddjango/django-stubs
+    "pytest==8.3.5",  # https://github.com/pytest-dev/pytest
+    "pytest-mock==3.14.0", # https://github.com/pytest-dev/pytest-mock/
+    "pytest-sugar==1.0.0", # https://github.com/Frozenball/pytest-sugar
+    "djangorestframework-stubs==3.15.2", # https://github.com/typeddjango/djangorestframework-stubs
+    "pytest-django==4.11.1", # https://github.com/pytest-dev/pytest-django
+    "beautifulsoup4==4.12.3", # https://www.crummy.com/software/BeautifulSoup/
+
+    # Code quality
+    "pre-commit==4.1.0", # https://github.com/pre-commit/pre-commit
+    "ruff==0.11.7", # https://github.com/astral-sh/ruff
+    "coverage==7.6.12", # https://github.com/nedbat/coveragepy
+    "django-coverage-plugin==3.1.0", # https://github.com/nedbat/django_coverage_plugin
+    "djlint==1.36.4", # https://github.com/Riverside-Healthcare/djLint
 ]
 build = [
     "hatchling>=1.26.3",
@@ -44,6 +62,60 @@ build = [
 [build-system]
 requires = ["hatchling >= 1.26.3"]
 build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+addopts = "--ds=tests.settings"
+python_files = [
+    "tests.py",
+    "test_*.py",
+    "*_tests.py",
+]
+
+include = ["tests/**"]
+omit = ["*/tests/*, */static/*"]
+plugins = ["django_coverage_plugin"]
+
+# ==== mypy ====
+[tool.mypy]
+python_versions = ["3.10", "3.11", "3.12", "3.13"]
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+plugins = [
+    "mypy_django_plugin.main",
+    "mypy_drf_plugin.main",
+]
+
+[[tool.mypy.overrides]]
+# Django migrations should not produce any errors:
+module = "*.migrations.*"
+ignore_errors = true
+
+[tool.django-stubs]
+django_settings_module = "tests.settings"
+
+# ==== djLint ====
+[tool.djlint]
+use_gitignore=true
+blank_line_after_tag = "load,extends"
+close_void_tags = true
+format_css = true
+format_js = true
+# TODO: remove T002 when fixed https://github.com/djlint/djLint/issues/687
+ignore = "H006,H030,H031,T002"
+include = "H017,H035"
+indent = 2
+max_line_length = 119
+profile = "django"
+extend_exclude = "src/django_scalar/templates/django_scalar/scalar.html"
+
+[tool.djlint.css]
+indent_size = 2
+
+[tool.djlint.js]
+indent_size = 2
 
 [[tool.uv.index]]
 name = "testpypi"

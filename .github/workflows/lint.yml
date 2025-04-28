@@ -3,21 +3,29 @@ name: Ruff it out
 on: [push]
 
 jobs:
-  lint:
+  qa:
+    name: "QA: lint and test"
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+    - uses: "actions/checkout@v4"
+    - name: "Install uv (py-${{ matrix.python-version }})"
+      uses: "astral-sh/setup-uv@v6"
       with:
+        version: "0.6.17"
         python-version: ${{ matrix.python-version }}
+        activate-environment: true
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install ruff
-    - name: Analysing the code with ruff
+        uv sync --extra test
+    - name: Install pre-commit
       run: |
-        ruff check
+        uv run --frozen pre-commit install
+    - name: "Run pre-commit with python version ${{ matrix.python-version }}"
+      run: |
+        uv run --frozen pre-commit run --all-files
+    - name: "Run tests with python version ${{ matrix.python-version }}"
+      run: |
+        uv run --frozen pytest

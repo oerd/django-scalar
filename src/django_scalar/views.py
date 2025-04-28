@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.template.response import TemplateResponse
 
 
 def scalar_viewer(request):
@@ -7,4 +7,11 @@ def scalar_viewer(request):
     scalar_js_url = "https://cdn.jsdelivr.net/npm/@scalar/api-reference"
     scalar_proxy_url = ""
     scalar_favicon_url = "/static/favicon.ico"
-    return render(request, "django_scalar/scalar.html", locals())
+    context = {
+        "openapi_url": openapi_url,
+        "title": title,
+        "scalar_js_url": scalar_js_url,
+        "scalar_proxy_url": scalar_proxy_url,
+        "scalar_favicon_url": scalar_favicon_url,
+    }
+    return TemplateResponse(request, "django_scalar/scalar.html", context)
