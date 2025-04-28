@@ -12,7 +12,9 @@ from drf_spectacular.utils import OpenApiParameter
 from rest_framework.fields import DecimalField
 
 
-def get_filter_parameters(filter_class: Type[FilterSet]) -> Optional[List[OpenApiParameter]]:
+def get_filter_parameters(
+    filter_class: Type[FilterSet],
+) -> Optional[List[OpenApiParameter]]:
     """
     Automatically generate OpenAPI parameters from a FilterSet class.
 

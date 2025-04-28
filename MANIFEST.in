@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include pytest.ini
+recursive-include src/django_scalar/static *
+recursive-include src/django_scalar/templates *
+recursive-include src/django_scalar/tests *
+recursive-include tests *
