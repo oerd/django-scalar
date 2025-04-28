@@ -1,4 +1,4 @@
-# This workflow will upload a Python Package to PyPI when a release is created. For more information see: 
+# This workflow will upload a Python Package to PyPI when a release is created. For more information see:
 # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
 
 name: Publish Python Package
@@ -29,7 +29,7 @@ jobs:
         run: |
           uv pip install --group build
           uv build
-      
+
       - name: Test build package
         run: |
           uv run --with dist/django_scalar-*.whl --refresh-package django_scalar --no-project -- python -c "import django_scalar"

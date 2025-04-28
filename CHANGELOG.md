@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - v0.1.10 Add a class-based view that derives from `SpectacularApiView`
 - v0.1.9 Add app settings to override openapi url, etc.
 
-## [0.1.8] - 2025-04-25=7
+## [0.1.8] - 2025-04-29
 
 - Added test suite for views, `get_filter_parameters`, and URLs
 - Added end-to-end tests that verify HTML contains the expected context data
@@ -21,8 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
- - Switch `scalar_viewer` to return a `TemplateResponse` instead of `HttpResponse`
- - Switched QA (linting) to using pre-commit, including ruff, mypy, djlint, etc.
+ - Changed project maintainer dependencies to use dependency-groups (installed with `--group` flag)
+  instead of optional-dependencies (installed with `--extra` flag).
+ - Change `scalar_viewer` to return a `TemplateResponse` instead of `HttpResponse`
+ - Update QA (linting) to using pre-commit, including: ruff, mypy, djlint, etc.
 
 ## [0.1.7] - 2025-04-25
 
