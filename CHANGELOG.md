@@ -9,8 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- v0.1.10 Add a class-based view that derives from `SpectacularApiView`
-- v0.1.9 Add app settings to override openapi url, etc.
+- v0.2.0 Add comprehensive configuration options:
+  - Add Django settings for configuring Scalar defaults (SCALAR_OPENAPI_URL, SCALAR_TITLE, SCALAR_THEME, SCALAR_JS_URL, SCALAR_PROXY_URL, SCALAR_FAVICON_URL)
+  - Support multiple instances of `scalar_viewer` by providing kwargs (openapi_url, title, theme, etc.)
+  - Add built-in support for Scalar themes
 
 ## [0.1.8] - 2025-04-29
 
