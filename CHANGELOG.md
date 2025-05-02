@@ -7,14 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+- Add a class-based view that derives from `SpectacularApiView`
+- Make `drf-spectacular` an optional dependency
 
-- v0.2.0 Add comprehensive configuration options:
-  - Add Django settings for configuring Scalar defaults (SCALAR_OPENAPI_URL, SCALAR_TITLE, SCALAR_THEME, SCALAR_JS_URL, SCALAR_PROXY_URL, SCALAR_FAVICON_URL)
-  - Support multiple instances of `scalar_viewer` by providing kwargs (openapi_url, title, theme, etc.)
-  - Add built-in support for Scalar themes
+## [0.2.0] - 2025-05-02
+
+- v0.2.0 feat: introduce configurable Scalar view and app settings (#3)
+- Add `app_settings` for centralized SCALAR_* default management
+- Add tests for custom configuration and theme behavior
+- Add installation and usage details to README.md
+
+### Changed
+
+- Updated `scalar_viewer` with custom parameters and theme support
+- Updated `scalar.html` for conditional theme handling
+
+### Removed
+
+- Unnecessary Swagger UI (rendered via DRF-Spectacular) from urls.py
 
 ## [0.1.8] - 2025-04-29
+
+### Added
 
 - Added test suite for views, `get_filter_parameters`, and URLs
 - Added end-to-end tests that verify HTML contains the expected context data
