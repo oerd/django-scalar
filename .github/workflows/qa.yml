@@ -34,4 +34,4 @@ jobs:
         uv run --frozen pre-commit run --all-files
     - name: "Run tests (py-${{ matrix.python-version }})"
       run: |
-        uv run --frozen pytest
+        uv run --frozen pytest -q
