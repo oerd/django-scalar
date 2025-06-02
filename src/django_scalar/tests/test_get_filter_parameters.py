@@ -10,6 +10,7 @@ from django_filters import (
     BooleanFilter,
     DateFilter,
     ChoiceFilter,
+    ModelChoiceFilter,
 )
 from drf_spectacular.utils import OpenApiParameter
 
@@ -55,6 +56,34 @@ class MockFilterSetWithChoices(FilterSet):
     class Meta:
         model = MockModel
         fields = ["status"]
+
+
+class Category(models.Model):
+    """Related model for testing ModelChoiceFilter."""
+
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        app_label = "test_app"
+
+
+class Item(models.Model):
+    """Model referencing ``Category`` via ForeignKey."""
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    class Meta:
+        app_label = "test_app"
+
+
+class ModelChoiceFilterSet(FilterSet):
+    """FilterSet containing a ``ModelChoiceFilter`` for testing."""
+
+    category = ModelChoiceFilter(queryset=Category.objects.all())
+
+    class Meta:
+        model = Item
+        fields = ["category"]
 
 
 class TestGetFilterParameters:
@@ -119,3 +148,11 @@ class TestGetFilterParameters:
 
         # Check enum values
         assert status_param.enum == ["active", "inactive", "pending"]
+
+    def test_get_filter_parameters_model_choice_filter(self):
+        """Ensure descriptions for ModelChoiceFilter aren't overwritten."""
+        parameters = get_filter_parameters(ModelChoiceFilterSet)
+
+        category_param = next(param for param in parameters if param.name == "category")
+        assert category_param.type is int
+        assert "ID of related Category" in category_param.description
